@@ -1,0 +1,110 @@
+#include <windows.h>
+#include "resources.h"
+
+CREATEPROCESS_MANIFEST_RESOURCE_ID RT_MANIFEST "Application.manifest"
+
+IDD_DLGFIRST DIALOG 260, 200, 418, 173
+STYLE DS_SHELLFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "USBemani Configuration"
+FONT 8, "MS Shell Dlg"
+
+BEGIN
+	GROUPBOX        "Rotary / Turntable",						GROUP_ROTARY,         6,  4,200, 61
+	AUTOCHECKBOX    "Invert Channel A (Turntable)",				ROTARY_INVERTA,      14, 16,104,  8
+	AUTOCHECKBOX    "Invert Channel B",							ROTARY_INVERTB,     122, 16, 80,  8
+	LTEXT           "Button Output Hold",						ROTARY_TTHOLD,       14, 32, 96,  8   
+	COMBOBOX                                    				ROTARY_TTHOLDCOUNT,  94, 30,104,  8, CBS_DROPDOWNLIST | WS_TABSTOP 
+	LTEXT           "Turntable Scaling",						ROTARY_PULSE,        14, 48, 96,  8   
+	COMBOBOX                                    				ROTARY_PULSECOUNT,   94, 46,104,  8, CBS_DROPDOWNLIST | WS_TABSTOP 
+
+	GROUPBOX        "Lighting",		              				GROUP_LIGHTS,		  6, 70,200, 45
+	AUTOCHECKBOX    "Enable Turntable Lighting",				LIGHTS_INVERTTT,	 14, 82, 96,  8
+	LTEXT           "Lighting Method",							LIGHTS_METHOD,		 14, 98,128,  8
+	COMBOBOX                                    				LIGHTS_COMM,		 94, 96,104,  8, CBS_DROPDOWNLIST | WS_TABSTOP
+
+	GROUPBOX       	"Device",			         				GROUP_DEVICE,		  6,120,200, 45
+	LTEXT           "Naming Scheme",							DEVICE_DEVNAME,		 14,132,128,  8
+	COMBOBOX                                    				DEVICE_DEVICENAME,	 94,130,104,  8, CBS_DROPDOWNLIST | WS_TABSTOP
+	LTEXT           "Custom Name",								DEVICE_CUSTNAME,	 14,148,128,  8
+	EDITTEXT													DEVICE_CUSTOMNAME,   94,146,104, 13
+
+	GROUPBOX        "PS2 Support",								GROUP_BUTTON,       212,  4,200,140
+	AUTOCHECKBOX    "Enable Support",							BUTTON_PS2ENABLE,	220, 16, 64,  8
+	LTEXT           "Pin 1",									BUTTON_SCUSTOM1,	220, 32, 32,  8
+	LTEXT           "Pin 2",									BUTTON_SCUSTOM2,	220, 48, 32,  8
+	LTEXT           "Pin 3",									BUTTON_SCUSTOM3,	220, 64, 32,  8
+	LTEXT           "Pin 4",									BUTTON_SCUSTOM4,	220, 80, 32,  8
+	LTEXT           "Pin 5",									BUTTON_SCUSTOM5,	220, 96, 32,  8
+	LTEXT           "Pin 6",									BUTTON_SCUSTOM6,	220,112, 32,  8
+	LTEXT           "Pin 7",									BUTTON_SCUSTOM7,	320, 32, 32,  8
+	LTEXT           "Pin 8",									BUTTON_SCUSTOM8,	320, 48, 32,  8
+	LTEXT           "Pin 9",									BUTTON_SCUSTOM9,	320, 64, 32,  8
+	LTEXT           "Pin 10",									BUTTON_SCUSTOM10,	320, 80, 32,  8
+	LTEXT           "Pin 11",									BUTTON_SCUSTOM11,	320, 96, 32,  8
+	LTEXT           "Pin 12",									BUTTON_SCUSTOM12,	320,112, 32,  8
+
+	COMBOBOX                                    				BUTTON_MAPTYPE,		292, 14,112,  8, CBS_DROPDOWNLIST | WS_TABSTOP
+	COMBOBOX                                    				BUTTON_CUSTOM1,		256, 30, 48,  8, CBS_DROPDOWNLIST | WS_TABSTOP
+	COMBOBOX                                    				BUTTON_CUSTOM2,		256, 46, 48,  8, CBS_DROPDOWNLIST | WS_TABSTOP
+	COMBOBOX                                    				BUTTON_CUSTOM3,		256, 62, 48,  8, CBS_DROPDOWNLIST | WS_TABSTOP
+	COMBOBOX                                    				BUTTON_CUSTOM4,		256, 78, 48,  8, CBS_DROPDOWNLIST | WS_TABSTOP
+	COMBOBOX                                    				BUTTON_CUSTOM5,		256, 94, 48,  8, CBS_DROPDOWNLIST | WS_TABSTOP
+	COMBOBOX                                    				BUTTON_CUSTOM6,		256,110, 48,  8, CBS_DROPDOWNLIST | WS_TABSTOP
+	COMBOBOX                                    				BUTTON_CUSTOM7,		356, 30, 48,  8, CBS_DROPDOWNLIST | WS_TABSTOP
+	COMBOBOX                                    				BUTTON_CUSTOM8,		356, 46, 48,  8, CBS_DROPDOWNLIST | WS_TABSTOP
+	COMBOBOX                                    				BUTTON_CUSTOM9,		356, 62, 48,  8, CBS_DROPDOWNLIST | WS_TABSTOP
+	COMBOBOX                                    				BUTTON_CUSTOM10,	356, 78, 48,  8, CBS_DROPDOWNLIST | WS_TABSTOP
+	COMBOBOX                                    				BUTTON_CUSTOM11,	356, 94, 48,  8, CBS_DROPDOWNLIST | WS_TABSTOP
+	COMBOBOX                                    				BUTTON_CUSTOM12,	356,110, 48,  8, CBS_DROPDOWNLIST | WS_TABSTOP
+
+	PUSHBUTTON      "Apply Settings",         	 				BUTTON_APPLYSET,    212,150, 60, 15
+	PUSHBUTTON      "Store Settings",          					BUTTON_STORESET,    278,150, 64, 15
+	PUSHBUTTON      "Update Firmware",         				 	BUTTON_FIRMWARE,    348,150, 64, 15
+END
+
+STRINGTABLE {
+	ROTARY_HOLD1,		"Pulse (Emulate Analog)"
+	ROTARY_HOLD2,		"(0.5x) Shorter Hold"
+	ROTARY_HOLD3,		"(1.0x) KOC/KASC Hold"
+	ROTARY_HOLD4,		"(2.0x) Longer Hold"
+
+	ROTARY_NOSCALE,		"No Scaling"
+	ROTARY_SCALEKOC,	"Based On KOC/KASC"
+	ROTARY_SCALEDAO1,	"Based On Dao (G1)"
+	ROTARY_SCALEDAO2,	"Based On Dao (G2+)"
+
+	LIGHTS_DIRECT,		"Direct-IO Drive"
+	LIGHTS_WS28XX,		"WS28XX-Series"
+	LIGHTS_OWLED,		"One-Wire RGB LED"
+
+	BUTTON_MAPIIDX      "IIDX Mapping"
+	BUTTON_MAPUSKOC,	"IIDX Mapping (Legacy A)"
+	BUTTON_MAPJKOC,		"IIDX Mapping (Legacy B)"
+	BUTTON_MAPPOPN,		"pop'n Mapping"
+	BUTTON_MAPDDR,		"DDR Mapping"
+	BUTTON_MAPGFDM,		"GuitarFreaks Mapping"
+	BUTTON_MAPCUSTOM	"Custom Mapping"
+
+	BUTTON_SELECT,		"Select"
+	BUTTON_L3,			"L3"
+	BUTTON_R3,			"R3"
+	BUTTON_START,		"Start"
+	BUTTON_DUP,   		"Up"
+	BUTTON_DRIGHT,		"Right"
+	BUTTON_DDOWN, 		"Down"
+	BUTTON_DLEFT, 		"Left"
+	BUTTON_L2,			"L2"
+	BUTTON_R2,			"R2"
+	BUTTON_L1,			"L1"
+	BUTTON_R1,			"R1"
+	BUTTON_TRIANGLE,	"Triangle"
+	BUTTON_CIRCLE,		"Circle"
+	BUTTON_CROSS,		"Cross"
+	BUTTON_SQUARE,		"Square"
+	BUTTON_NC,			"N/C"
+
+	DEVICE_NAMEDEF,		"Based On Board Type"
+	DEVICE_NAME1P,		"Identify As 1P"
+	DEVICE_NAME2P,		"Identify As 2P"
+	DEVICE_NAMECUST,	"Use Custom Name"
+}
