@@ -279,7 +279,7 @@ void PS2_LoadData(void) {
 		DDRE  |=  0x40;
 		PORTE |=  0x40;
 		// We need a temporary place to read data into.
-		uint16_t r_temp = Button_GetState(0, 0);
+		uint16_t r_temp = Button_GetState();
 		// We also need some temporary space to write data to.
 		uint16_t w_temp = 0;
 

@@ -20,13 +20,33 @@ uint16_t LightsData;
 // The v2 Arcade only saw the light of day in the form of 3 prototype units.
 void Lights_Init(void) {
 	Config_AddressLights(&SettingsLights);
-	Config_AddressDevice(&SettingsDevice);		
+	Config_AddressDevice(&SettingsDevice);
 }
 
-void Lights_StoreState(uint16_t OutputData) {	
-}
 
-uint16_t Lights_RetrieveState(void) {
-	return 0;
-}
+void Lights_SetState(uint16_t OutputData) {
+  if(OutputData) {
+    DDRE  |=  0x40;
+    PORTE |=  0x40;
+  } else {
+    DDRE  &= ~0x40;
+    PORTE &= ~0x40;
+  }
 
+  // Set output
+	L07_DDR  |=  0xFF;
+	L07_PORT  = (OutputData & 0xFF);
+	L8F_DDR  |=  0xF0;
+	L8F_PORT  = (OutputData & 0x0F00) >> 4;
+
+  // Pulse latch
+	DDRF  |=  0x80;
+	PORTF |=  0x80;
+	asm volatile("nop\nnop\nnop\nnop\nnop\nnop\nnop\nnop\n");
+	PORTF &= ~0x80;
+
+  L07_DDR  &= ~0xFF;
+  L07_PORT |=  0xFF;
+  L8F_DDR  &= ~0xF0;
+  L8F_PORT |=  0xF0;
+}

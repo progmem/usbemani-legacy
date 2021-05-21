@@ -33,19 +33,19 @@ void Button_Init(void) {
 	sei();
 }
 
-uint16_t Button_GetState(uint8_t useLights, uint16_t LightsData) {
+uint16_t Button_GetState(void) {
 	// We need some temporary variables.
 	uint16_t buf = 0;
 	uint8_t  buf07 = 0;
-	uint8_t  buf8F = 0;	
+	uint8_t  buf8F = 0;
 
 	// Simply read into the buffers...
 	B07_DDR  &= ~0xFF;
 	B07_PORT |=  0xFF;
-	buf07 	  = ~B07_PIN;
+	B8F_DDR  &= ~0xF0;
+	B8F_PORT |=  0xF0;
 
-	B07_DDR  &= ~0xF0;
-	B07_PORT |=  0xF0;
+	buf07 	  = ~B07_PIN;
 	buf8F     = ~B8F_PIN;
 
 	// ...and output them to the main buffer.
