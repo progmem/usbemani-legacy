@@ -326,15 +326,11 @@ void PS2_LoadData(void) {
 				break;
 			default:
 				break;
-		}		
+		}
 
 		// Once we're done with transformation, store this data outside the function so our interrupt can access it.
 		// Don't forget to invert!
 		PS2_Data = ~w_temp;
-	}
-	else {
-		DDRE  |=  0x40;
-		PORTE &= ~0x40;
 	}
 }
 
