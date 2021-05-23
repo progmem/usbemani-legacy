@@ -204,13 +204,13 @@ void ProcessGenericHIDReport(Output_t* ReportData)
 	else if (ReportData->Command >= 0x40) {
 		Config_UpdateSettings(ReportData->Command, ReportData->Data);
 	}
-	
+
 	// We are only handling USB-driven lighting if the PS2 is inactive.
 	if (Device->PS2Assert == 0) {
 		// We need to reset our timeout for the lights.
 		Lights->LightsAssert = 1000;
 		// We also need to forward the lighting data over.
-		Lights_StoreState(ReportData->Lights);
+		Lights_SetState(ReportData->Lights);
 	}
 }
 
@@ -238,13 +238,11 @@ void CreateGenericHIDReport(Joystick_t* const ReportData)
 	ReportData->Slider =  Rotary_GetPosition(1);
 	ReportData->Dial   =  Rotary_GetPosition(0);
 
+	ReportData->Button =  Button_GetState();
 	if (Lights->LightsAssert) {
-		uint16_t LightsData = Lights_RetrieveState();
 		Lights->LightsAssert--;
-		ReportData->Button =  Button_GetState(1, LightsData);
-	}
-	else {
-		ReportData->Button =  Button_GetState(0, 0);
+  } else {
+		Lights_SetState(ReportData->Button);
 	}
 }
 
